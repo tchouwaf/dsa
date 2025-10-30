@@ -25,20 +25,22 @@ void merge(int* list, int p, int q, int r){
 
     int* L = malloc((n_1+1)*sizeof(int*));
     int* R = malloc((n_2+1)*sizeof(int*));
+
+    assert(L && R);
     
     for(int i=0; i<n_1; i++){
-        L[i] = list[p+i-1];
+        L[i] = list[p+i];
     }
 
     for(int j=0; j<n_2; j++){
-        R[j] = list[q+j];
+        R[j] = list[q+j+1];
     }
 
-    L[n_1+1] = INT_MAX;
-    R[n_2+1] = INT_MAX;
+    L[n_1] = INT_MAX;
+    R[n_2] = INT_MAX;
 
-    int i = 1;
-    int j = 1;
+    int i = 0;
+    int j = 0;
 
     for(int k=p; k<r; k++){
         if(L[i] <= R[j]){
@@ -54,18 +56,10 @@ void merge(int* list, int p, int q, int r){
     free(L);
 }
 
-void merge_sort(int* list, int p, int r, int n){
-
-    if(n==0){
-        return NULL;
-    }
-
-    assert(p<r);
-
-    int q = floor((p+r)/2);
-
-    merge_sort(list, p, q, r);
-    merge_sort(list, q, r, n);
-
-    merge(list, p, q, r);
+void merge_sort(int *a, int p, int r) {
+    if (p >= r) return;
+    int q = p + (r - p) / 2;
+    merge_sort(a, p, q);
+    merge_sort(a, q + 1, r);
+    merge(a, p, q, r);
 }
