@@ -1,6 +1,6 @@
 #ifndef NODE_H
 #define NODE_H
-#include "../algorithm/sort.h"
+#include "sort.h"
 
 typedef struct node{
     int data;
@@ -24,7 +24,7 @@ int size_node(node_t head);
 void print_node(node_t head);
 
 //insert an element in the linked list as first element
-void front_insert_node(node_t head, int x);
+node_t front_insert_node(node_t head, int x);
 
 //return 1 if we find the element x in our list, 0 in the other case
 int find_node(node_t head, int x);

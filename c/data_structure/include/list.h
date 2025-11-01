@@ -1,18 +1,18 @@
-#include "list.h"
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef LIST_H
+#define LIST_H
+#include "sort.h"
 
-list_t init_list(int x){
-    list_t list =  malloc(sizeof(*list));
-    if(!list) exit(EXIT_FAILURE);
+typedef struct list{
+    int data;
+    struct list* next;
+    struct list* prev;
+} *list_t;
 
-    list->next = NULL;
-    list->prev = NULL;
-    list->data = x;
 
-    return list;
-}
+//init our double linked list
+list_t init_list(int x);
 
+//add an element to our list
 void insert_list(list_t* Q, int x);
 
 //remove the last element of our double list and return it
@@ -47,3 +47,5 @@ list_t sort_list(list_t Q);
 
 //free our double linked list
 void free_list(list_t Q);
+
+#endif

@@ -12,7 +12,7 @@ node_t init_node(int x){
     return head;
 }
 
-node_t insert_node(node_t *head, int x) {
+void insert_node(node_t *head, int x) {
     node_t new_node = malloc(sizeof(*new_node));
     if(!new_node) exit(EXIT_FAILURE);
     new_node->data = x;
@@ -28,8 +28,6 @@ node_t insert_node(node_t *head, int x) {
         curr = curr->next;
 
     curr->next = new_node;
-
-    return curr;
 }
 
 
@@ -116,7 +114,7 @@ node_t reverse_node(node_t head) {
 
 
 node_t sort_node(node_t head) {
-    int n = size(head);
+    int n = size_node(head);
     if (n == 0) return NULL;
 
     int* list = malloc(n * sizeof(int));
@@ -127,11 +125,11 @@ node_t sort_node(node_t head) {
         tmp = tmp->next;
     }
 
-    merge_sort(list, 0, n-1, n-1);
+    merge_sort(list, 0, n-1);
 
-    node_t sorted = NULL;
+    node_t sorted = malloc(sizeof(*sorted));
     for (int i = n - 1; i >= 0; i--) {
-        insert(&sorted, list[i]);
+        insert_node(&sorted, list[i]);
     }
 
     free(list);
